@@ -1,0 +1,185 @@
+<definitions name="SimpleTransactionExportService" targetNamespace="http://webservice.ie.smallworldfs.com/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:tns="http://webservice.ie.smallworldfs.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+   <types>
+      <xsd:schema>
+         <xsd:import namespace="http://webservice.ie.smallworldfs.com/" schemaLocation="SimpleTransactionExportService_schema1.xsd"/>
+      </xsd:schema>
+   </types>
+   <message name="addTransactionNoteResponse">
+      <part name="parameters" element="tns:addTransactionNoteResponse"/>
+   </message>
+   <message name="acknowledgeTransactionExportResponse">
+      <part name="parameters" element="tns:acknowledgeTransactionExportResponse"/>
+   </message>
+   <message name="getTransactionExportTransactionsResponse">
+      <part name="parameters" element="tns:getTransactionExportTransactionsResponse"/>
+   </message>
+   <message name="getMtnByFolio">
+      <part name="parameters" element="tns:getMtnByFolio"/>
+   </message>
+   <message name="WebServiceValidationException">
+      <part name="fault" element="tns:WebServiceValidationException"/>
+   </message>
+   <message name="updateTransactionsExport">
+      <part name="parameters" element="tns:updateTransactionsExport"/>
+   </message>
+   <message name="acknowledgeTransactionExport">
+      <part name="parameters" element="tns:acknowledgeTransactionExport"/>
+   </message>
+   <message name="getMtnByFolioResponse">
+      <part name="parameters" element="tns:getMtnByFolioResponse"/>
+   </message>
+   <message name="updateTransactionsExportResponse">
+      <part name="parameters" element="tns:updateTransactionsExportResponse"/>
+   </message>
+   <message name="updateTransactionExportResponse">
+      <part name="parameters" element="tns:updateTransactionExportResponse"/>
+   </message>
+   <message name="WebServiceException">
+      <part name="fault" element="tns:WebServiceException"/>
+   </message>
+   <message name="addTransactionNote">
+      <part name="parameters" element="tns:addTransactionNote"/>
+   </message>
+   <message name="updateTransactionExport">
+      <part name="parameters" element="tns:updateTransactionExport"/>
+   </message>
+   <message name="getTransactionExportTransactions">
+      <part name="parameters" element="tns:getTransactionExportTransactions"/>
+   </message>
+   <portType name="SimpleTransactionExportServiceDelegate">
+      <operation name="getTransactionExportTransactions">
+         <input message="tns:getTransactionExportTransactions" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/getTransactionExportTransactionsRequest"/>
+         <output message="tns:getTransactionExportTransactionsResponse" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/getTransactionExportTransactionsResponse"/>
+         <fault name="WebServiceValidationException" message="tns:WebServiceValidationException" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/getTransactionExportTransactions/Fault/WebServiceValidationException"/>
+         <fault name="WebServiceException" message="tns:WebServiceException" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/getTransactionExportTransactions/Fault/WebServiceException"/>
+      </operation>
+      <operation name="getMtnByFolio">
+         <input message="tns:getMtnByFolio" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/getMtnByFolioRequest"/>
+         <output message="tns:getMtnByFolioResponse" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/getMtnByFolioResponse"/>
+         <fault name="WebServiceValidationException" message="tns:WebServiceValidationException" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/getMtnByFolio/Fault/WebServiceValidationException"/>
+         <fault name="WebServiceException" message="tns:WebServiceException" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/getMtnByFolio/Fault/WebServiceException"/>
+      </operation>
+      <operation name="updateTransactionExport">
+         <input message="tns:updateTransactionExport" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/updateTransactionExportRequest"/>
+         <output message="tns:updateTransactionExportResponse" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/updateTransactionExportResponse"/>
+         <fault name="WebServiceValidationException" message="tns:WebServiceValidationException" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/updateTransactionExport/Fault/WebServiceValidationException"/>
+         <fault name="WebServiceException" message="tns:WebServiceException" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/updateTransactionExport/Fault/WebServiceException"/>
+      </operation>
+      <operation name="updateTransactionsExport">
+         <input message="tns:updateTransactionsExport" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/updateTransactionsExportRequest"/>
+         <output message="tns:updateTransactionsExportResponse" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/updateTransactionsExportResponse"/>
+         <fault name="WebServiceValidationException" message="tns:WebServiceValidationException" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/updateTransactionsExport/Fault/WebServiceValidationException"/>
+         <fault name="WebServiceException" message="tns:WebServiceException" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/updateTransactionsExport/Fault/WebServiceException"/>
+      </operation>
+      <operation name="acknowledgeTransactionExport">
+         <input message="tns:acknowledgeTransactionExport" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/acknowledgeTransactionExportRequest"/>
+         <output message="tns:acknowledgeTransactionExportResponse" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/acknowledgeTransactionExportResponse"/>
+         <fault name="WebServiceValidationException" message="tns:WebServiceValidationException" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/acknowledgeTransactionExport/Fault/WebServiceValidationException"/>
+         <fault name="WebServiceException" message="tns:WebServiceException" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/acknowledgeTransactionExport/Fault/WebServiceException"/>
+      </operation>
+      <operation name="addTransactionNote">
+         <input message="tns:addTransactionNote" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/addTransactionNoteRequest"/>
+         <output message="tns:addTransactionNoteResponse" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/addTransactionNoteResponse"/>
+         <fault name="WebServiceValidationException" message="tns:WebServiceValidationException" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/addTransactionNote/Fault/WebServiceValidationException"/>
+         <fault name="WebServiceException" message="tns:WebServiceException" wsam:Action="http://webservice.ie.smallworldfs.com/SimpleTransactionExportServiceDelegate/addTransactionNote/Fault/WebServiceException"/>
+      </operation>
+   </portType>
+   <binding name="SimpleTransactionExportServicePortBinding" type="tns:SimpleTransactionExportServiceDelegate">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <operation name="getTransactionExportTransactions">
+         <soap:operation soapAction=""/>
+         <input>
+            <soap:body use="literal"/>
+         </input>
+         <output>
+            <soap:body use="literal"/>
+         </output>
+         <fault name="WebServiceValidationException">
+            <soap:fault name="WebServiceValidationException" use="literal"/>
+         </fault>
+         <fault name="WebServiceException">
+            <soap:fault name="WebServiceException" use="literal"/>
+         </fault>
+      </operation>
+      <operation name="getMtnByFolio">
+         <soap:operation soapAction=""/>
+         <input>
+            <soap:body use="literal"/>
+         </input>
+         <output>
+            <soap:body use="literal"/>
+         </output>
+         <fault name="WebServiceValidationException">
+            <soap:fault name="WebServiceValidationException" use="literal"/>
+         </fault>
+         <fault name="WebServiceException">
+            <soap:fault name="WebServiceException" use="literal"/>
+         </fault>
+      </operation>
+      <operation name="updateTransactionExport">
+         <soap:operation soapAction=""/>
+         <input>
+            <soap:body use="literal"/>
+         </input>
+         <output>
+            <soap:body use="literal"/>
+         </output>
+         <fault name="WebServiceValidationException">
+            <soap:fault name="WebServiceValidationException" use="literal"/>
+         </fault>
+         <fault name="WebServiceException">
+            <soap:fault name="WebServiceException" use="literal"/>
+         </fault>
+      </operation>
+      <operation name="updateTransactionsExport">
+         <soap:operation soapAction=""/>
+         <input>
+            <soap:body use="literal"/>
+         </input>
+         <output>
+            <soap:body use="literal"/>
+         </output>
+         <fault name="WebServiceValidationException">
+            <soap:fault name="WebServiceValidationException" use="literal"/>
+         </fault>
+         <fault name="WebServiceException">
+            <soap:fault name="WebServiceException" use="literal"/>
+         </fault>
+      </operation>
+      <operation name="acknowledgeTransactionExport">
+         <soap:operation soapAction=""/>
+         <input>
+            <soap:body use="literal"/>
+         </input>
+         <output>
+            <soap:body use="literal"/>
+         </output>
+         <fault name="WebServiceValidationException">
+            <soap:fault name="WebServiceValidationException" use="literal"/>
+         </fault>
+         <fault name="WebServiceException">
+            <soap:fault name="WebServiceException" use="literal"/>
+         </fault>
+      </operation>
+      <operation name="addTransactionNote">
+         <soap:operation soapAction=""/>
+         <input>
+            <soap:body use="literal"/>
+         </input>
+         <output>
+            <soap:body use="literal"/>
+         </output>
+         <fault name="WebServiceValidationException">
+            <soap:fault name="WebServiceValidationException" use="literal"/>
+         </fault>
+         <fault name="WebServiceException">
+            <soap:fault name="WebServiceException" use="literal"/>
+         </fault>
+      </operation>
+   </binding>
+   <service name="SimpleTransactionExportService">
+      <port name="SimpleTransactionExportServicePort" binding="tns:SimpleTransactionExportServicePortBinding">
+         <soap:address location="https://ua.oswfs.com/ImportExport/SimpleTransactionExportService"/>
+      </port>
+   </service>
+</definitions>

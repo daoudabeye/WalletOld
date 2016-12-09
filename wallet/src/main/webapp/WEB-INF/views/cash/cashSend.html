@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Cash | envoie</title>
+
+<!-- Bootstrap Core CSS -->
+<link
+	href="../../../resources/gentellela/vendors/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/vendors/bootstrap/css/bootstrap.min.css}" />
+<!-- Custom Fonts Awesome-->
+<link
+	href="../../../resources/vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/vendor/font-awesome/css/font-awesome.min.css}" />
+<!-- NProgress -->
+<link
+	href="../../../resources/gentellela/vendors/nprogress/nprogress.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/vendors/nprogress/nprogress.css}" />
+
+<!-- Custom Theme Style -->
+<link href="../../../resources/gentellela/css/custom.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/css/custom.min.css}" />
+</head>
+
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<div class="col-md-3 left_col">
+				<div th:replace="fragments/menu :: menu">&nbsp;</div>
+			</div>
+
+			<!-- top navigation -->
+			<div class="top_nav">
+				<div th:replace="fragments/top :: top">&nbsp;</div>
+			</div>
+			<!-- /top navigation -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>Operation</h3>
+						</div>
+
+						<div class="title_right">
+							<div
+								class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+								<div class="input-group">
+									<input type="text" class="form-control"
+										placeholder="Search for..."> <span
+										class="input-group-btn">
+										<button class="btn btn-default" type="button">Go!</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>Envoie d'argent</h2>
+									<ul class="nav navbar-right panel_toolbox">
+										<li><a class="collapse-link"><i
+												class="fa fa-chevron-up"></i></a></li>
+										<li class="dropdown"><a href="#" class="dropdown-toggle"
+											data-toggle="dropdown" role="button" aria-expanded="false"><i
+												class="fa fa-wrench"></i></a>
+											<ul class="dropdown-menu" role="menu">
+												<li><a href="#">Settings 1</a></li>
+												<li><a href="#">Settings 2</a></li>
+											</ul></li>
+										<li><a class="close-link"><i class="fa fa-close"></i></a>
+										</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+
+								<th:block th:if="${success == null}">
+									<div class="x_content">
+										<h2>Envoyer de l’argent dans plus de 200 pays du monde
+											avec le service d’envoi d’espèces PAYME.</h2>
+										<th:block th:if="${#fields.hasErrors('${cashForm.*}')}">
+											<div
+											th:replace="fragments/alert :: alert (type='danger', message=${errorMessage})">Alert</div>
+										</th:block>
+										<form th:method="post" th:action="@{/envoidargent}"
+											th:object="${cashForm}" role="form">
+											<!-- Tabs -->
+											<div id="wizard_verticle" class="form_wizard wizard_verticle">
+												<ul class="list-unstyled wizard_steps">
+													<li><a href="#step-1"> <span class="step_no">1</span>
+													</a></li>
+													<li><a href="#step-2"> <span class="step_no">2</span>
+													</a></li>
+													<li><a href="#step-3"> <span class="step_no">3</span>
+													</a></li>
+												</ul>
+
+												<div id="step-1">
+													<h2 class="StepTitle">1ere étape</h2>
+													<div class="form-horizontal form-label-left">
+
+														<span class="section">Expéditeur</span>
+
+														<div class="form-group">
+															<label class="control-label col-md-3 col-sm-3"
+																for="first-name">Numéro <span class="required">*</span>
+															</label>
+															<div class="col-md-6 col-sm-6">
+																<input type="number" id="first-name2"
+																	required="required"
+																	class="form-control col-md-7 col-xs-12"
+																	th:field="*{snumero}">
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-md-3 col-sm-3"
+																for="last-name">Nom <span class="required">*</span>
+															</label>
+															<div class="col-md-6 col-sm-6">
+																<input type="text" id="last-name2" name="last-name"
+																	required="required" th:field="*{snom}"
+																	class="form-control col-md-7 col-xs-12">
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="middle-name"
+																class="control-label col-md-3 col-sm-3">Prenom</label>
+															<div class="col-md-6 col-sm-6">
+																<input id="middle-name2" th:field="*{sprenom}"
+																	class="form-control col-md-7 col-xs-12" type="text"
+																	name="middle-name">
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-md-3 col-sm-3">Genre</label>
+															<div class="col-md-6 col-sm-6">
+																<div id="gender2" class="btn-group"
+																	data-toggle="buttons">
+																	<label class="btn btn-default"
+																		data-toggle-class="btn-primary"
+																		data-toggle-passive-class="btn-default"> <input
+																		type="radio" name="gender" value="male">
+																		&nbsp; Homme &nbsp;
+																	</label> <label class="btn btn-primary"
+																		data-toggle-class="btn-primary"
+																		data-toggle-passive-class="btn-default"> <input
+																		type="radio" name="gender" value="female"
+																		checked="checked"> Femme
+																	</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="middle-name"
+																class="control-label col-md-3 col-sm-3">Adresse</label>
+															<div class="col-md-6 col-sm-6">
+																<input id="middle-name2" th:field="*{sadresse}"
+																	class="form-control col-md-7 col-xs-12" type="text"
+																	name="middle-name">
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="middle-name"
+																class="control-label col-md-3 col-sm-3">Ville</label>
+															<div class="col-md-6 col-sm-6">
+																<input id="middle-name2" th:field="*{sville}"
+																	class="form-control col-md-7 col-xs-12" type="text"
+																	name="middle-name">
+															</div>
+														</div>
+														<div class="form-group"
+															th:classappend="${#fields.hasErrors('spays')}? 'has-error'">
+															<label class="control-label col-md-3 col-sm-3 col-xs-12">Pays</label>
+															<div class="col-md-6 col-sm-6">
+																<select class="select2_single form-control"
+																	tabindex="-1" th:field="*{spays}" id="spays"
+																	name="spays" data-live-search="true">
+																	<option value="" selected="selected">-----Selectionner-----</option>
+																	<option th:each="type : ${allPays}" th:value="${type}"
+																		th:text=${type}>Wireframe</option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="middle-name"
+																class="control-label col-md-3 col-sm-3">Numéro
+																Carte</label>
+															<div class="col-md-6 col-sm-6">
+																<input id="middle-name2" th:field="*{sidcard}"
+																	class="form-control col-md-7 col-xs-12" type="text"
+																	name="middle-name">
+															</div>
+														</div>
+													</div>
+												</div>
+												<div id="step-2">
+													<h2 class="StepTitle">2eme étape</h2>
+													<div class="form-horizontal form-label-left">
+
+														<span class="section">Réceveur</span>
+
+														<div class="form-group">
+															<label class="control-label col-md-3 col-sm-3"
+																for="first-name">Numéro <span class="required">*</span>
+															</label>
+															<div class="col-md-6 col-sm-6">
+																<input type="number" id="first-name2"
+																	required="required"
+																	class="form-control col-md-7 col-xs-12"
+																	th:field="*{rnumero}">
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-md-3 col-sm-3"
+																for="last-name">Nom <span class="required">*</span>
+															</label>
+															<div class="col-md-6 col-sm-6">
+																<input type="text" id="last-name2" name="last-name"
+																	required="required" th:field="*{rnom}"
+																	class="form-control col-md-7 col-xs-12">
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="middle-name"
+																class="control-label col-md-3 col-sm-3">Prenom</label>
+															<div class="col-md-6 col-sm-6">
+																<input id="middle-name2" th:field="*{rprenom}"
+																	class="form-control col-md-7 col-xs-12" type="text"
+																	name="middle-name">
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-md-3 col-sm-3">Genre</label>
+															<div class="col-md-6 col-sm-6">
+																<div id="gender2" class="btn-group"
+																	data-toggle="buttons">
+																	<label class="btn btn-default"
+																		data-toggle-class="btn-primary"
+																		data-toggle-passive-class="btn-default"> <input
+																		type="radio" name="gender" value="male">
+																		&nbsp; Homme &nbsp;
+																	</label> <label class="btn btn-primary"
+																		data-toggle-class="btn-primary"
+																		data-toggle-passive-class="btn-default"> <input
+																		type="radio" name="gender" value="female"
+																		checked="checked"> Femme
+																	</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="middle-name"
+																class="control-label col-md-3 col-sm-3">Adresse</label>
+															<div class="col-md-6 col-sm-6">
+																<input id="middle-name2" th:field="*{radresse}"
+																	class="form-control col-md-7 col-xs-12" type="text"
+																	name="middle-name">
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="middle-name"
+																class="control-label col-md-3 col-sm-3">Ville</label>
+															<div class="col-md-6 col-sm-6">
+																<input id="middle-name2" th:field="*{rville}"
+																	class="form-control col-md-7 col-xs-12" type="text"
+																	name="middle-name">
+															</div>
+														</div>
+														<div class="form-group"
+															th:classappend="${#fields.hasErrors('spays')}? 'has-error'">
+															<label class="control-label col-md-3 col-sm-3 col-xs-12">Pays</label>
+															<div class="col-md-6 col-sm-6">
+																<select class="select2_single form-control"
+																	tabindex="-1" th:field="*{rpays}" id="spays"
+																	name="spays" data-live-search="true">
+																	<option value="" selected="selected">-----Selectionner-----</option>
+																	<option th:each="type : ${allPays}" th:value="${type}"
+																		th:text=${type}>Wireframe</option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="middle-name"
+																class="control-label col-md-3 col-sm-3">Numéro
+																Carte</label>
+															<div class="col-md-6 col-sm-6">
+																<input id="middle-name2" th:field="*{ridcard}"
+																	class="form-control col-md-7 col-xs-12" type="text"
+																	name="middle-name">
+															</div>
+														</div>
+													</div>
+												</div>
+												<div id="step-3">
+													<div class="form-horizontal form-label-left">
+														<span class="section">Montant</span>
+														<div class="form-group">
+															<label class="control-label col-md-3 col-sm-3"
+																for="first-name">Montant <span class="required">*</span>
+															</label>
+															<div class="col-md-6 col-sm-6">
+																<input type="text" id="first-name2" required="required"
+																	class="form-control col-md-7 col-xs-12"
+																	th:field="*{montant}">
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- End SmartWizard Content -->
+										</form>
+									</div>
+								</th:block>
+
+								<th:block th:if="${success != null}">
+									<div class="x_content">
+										<div class="bs-example" data-example-id="simple-jumbotron">
+											<div class="jumbotron">
+												<h5>Opération effectuée</h5>
+												<p>
+													<span th:text="${success}"></span>
+												</p>
+											</div>
+										</div>
+										<div class="ln_solid"></div>
+										<div class="form-group">
+											<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+												<a class="btn btn-success" target="_blank"
+													th:href="@{'/generateOpRecu/' + ${idOperation} +'/pdf'}">
+													<span class="fa fa-arrow-circle-right"></span> Recu Envoi (pdf)
+												</a>
+												<a class="btn btn-success" target="_blank"
+													th:href="@{'/generateOpRecu/' + ${idOperation} +'/pdf'}">
+													<span class="fa fa-arrow-circle-right"></span> Recu (pdf)
+												</a> <a class="btn btn-success" target="_blank"
+													th:href="@{'/generateOpRecu/' + ${idOperation} +'/html'}">
+													<span class="fa fa-arrow-circle-right"></span> Recu (html)
+												</a>
+											</div>
+										</div>
+									</div>
+								</th:block>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					<div th:replace="fragments/footer :: footer">&copy; 2016 Wallet</div>
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="../../../resources/gentellela/vendors/jquery/jquery.min.js"
+		th:src="@{/resources/gentellela/vendors/jquery/jquery.min.js}"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script
+		src="../../../resources/gentellela/vendors/bootstrap/js/bootstrap.min.js"
+		th:src="@{/resources/gentellela/vendors/bootstrap/js/bootstrap.min.js}"></script>
+
+	<!-- FastClick -->
+	<script
+		src="../../../resources/gentellela/vendors/fastclick/fastclick.js"
+		th:src="@{/resources/gentellela/vendors/fastclick/fastclick.js}"></script>
+	<!-- NProgress -->
+	<script
+		src="../../../resources/gentellela/vendors/nprogress/nprogress.js"
+		th:src="@{/resources/gentellela/vendors/nprogress/nprogress.js}"></script>
+
+	<!-- jQuery Smart Wizard -->
+	<script
+		src="../../../resources/gentellela/vendors/jQuery-Smart-Wizard/jquery.smartWizard.js"
+		th:src="@{/resources/gentellela/vendors/jQuery-Smart-Wizard/jquery.smartWizard.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script src="../../../resources/gentellela/js/custom.min.js"
+		th:src="@{/resources/gentellela/js/custom.min.js}"></script>
+
+	<!-- jQuery Smart Wizard -->
+	<script>
+		$(document).ready(function() {
+			$('#wizard').smartWizard();
+
+			$('#wizard_verticle').smartWizard({
+				transitionEffect : 'slide'
+			});
+
+			$('.buttonNext').addClass('btn btn-success');
+			$('.buttonPrevious').addClass('btn btn-primary');
+			$('.buttonFinish').addClass('btn btn-default');
+		});
+	</script>
+	<!-- /jQuery Smart Wizard -->
+
+</body>
+</html>

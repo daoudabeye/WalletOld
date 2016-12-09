@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Details | Profile</title>
+
+<!-- Bootstrap Core CSS -->
+<link
+	href="../../../resources/gentellela/vendors/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/vendors/bootstrap/css/bootstrap.min.css}" />
+<!-- Custom Fonts Awesome-->
+<link
+	href="../../../resources/vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/vendor/font-awesome/css/font-awesome.min.css}" />
+<!-- NProgress -->
+<link
+	href="../../../resources/gentellela/vendors/nprogress/nprogress.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/vendors/nprogress/nprogress.css}" />
+
+<!-- Custom Theme Style -->
+<link href="../../../resources/gentellela/css/custom.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/css/custom.min.css}" />
+</head>
+
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<div class="col-md-3 left_col">
+				<div th:replace="fragments/menu :: menu">&nbsp;</div>
+			</div>
+
+			<!-- top navigation -->
+			<div class="top_nav">
+				<div th:replace="fragments/top :: top">&nbsp;</div>
+			</div>
+			<!-- /top navigation -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>Profile Utilisateur</h3>
+						</div>
+						<th:block th:if="${success != null}">
+							<div
+								th:replace="fragments/alert :: alert (type='info', message=${success})">Alert</div>
+						</th:block>
+						<div class="title_right">
+							<div
+								class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+								<div class="input-group">
+									<input type="text" class="form-control"
+										placeholder="Search for..."> <span
+										class="input-group-btn">
+										<button class="btn btn-default" type="button">Go!</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>
+										Details Utilisateur <small>details des activitées</small>
+									</h2>
+									<ul class="nav navbar-right panel_toolbox">
+										<li><a class="collapse-link"><i
+												class="fa fa-chevron-up"></i></a></li>
+										<li class="dropdown"><a href="#" class="dropdown-toggle"
+											data-toggle="dropdown" role="button" aria-expanded="false"><i
+												class="fa fa-wrench"></i></a>
+											<ul class="dropdown-menu" role="menu">
+												<li><a href="#">Settings 1</a></li>
+												<li><a href="#">Settings 2</a></li>
+											</ul></li>
+										<li><a class="close-link"><i class="fa fa-close"></i></a>
+										</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+										<div class="profile_img">
+											<div id="crop-avatar">
+												<!-- Current avatar -->
+												<img th:src="@{/resources/images/avatar.png}" alt="Avatar"
+													title="Change the avatar"
+													class="img-responsive avatar-view">
+											</div>
+										</div>
+										<h3>
+											<span th:text="${user.nom}"></span>, <span
+												th:text="${user.prenom}"></span>
+										</h3>
+
+										<ul class="list-unstyled user_data">
+											<li><i class="fa fa-phone user-profile-icon"></i> <span
+												th:text="${infos.numero}"></span></li>
+											<li><i class="fa fa-map-marker user-profile-icon"></i> <span
+												th:text="${user.adresse}"></span>, <span
+												th:text="${user.ville}"></span>, <span
+												th:text="${user.pays}"></span></li>
+
+											<li><i class="fa fa-briefcase user-profile-icon"></i> <span
+												th:text="${infos.role}"></span></li>
+
+										</ul>
+
+										<a class="btn btn-success"
+											th:href="@{'/search/details/modifier/' + ${user.userId}}"><i
+											class="fa fa-edit m-right-xs"></i>Modifier</a> <br />
+
+										<!-- start skills -->
+										<h4>Statut</h4>
+										<ul class="list-unstyled user_data">
+											<li>
+												<p>Compte d'operation</p> <span class="label label-primary"
+												th:text="'Etat : ' + (${infos.geler} ? 'GELER' : 'ACTIF')"></span>
+											</li>
+											<li>
+												<p>Compte Internet</p> <span class="label label-primary"
+												th:text="'Etat : ' + (${infos.blocked} ? 'BLOQUER' : 'ACTIF')"></span>
+											</li>
+										</ul>
+										<!-- end of skills -->
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+
+										<div class="profile_title">
+											<div class="col-md-6">
+												<h2>Historique solde</h2>
+											</div>
+											<div class="col-md-6">
+												<div id="reportrange" class="pull-right"
+													style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
+													<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+													<span>December 30, 2014 - January 28, 2015</span> <b
+														class="caret"></b>
+												</div>
+											</div>
+										</div>
+										<!-- start of user-activity-graph -->
+										<div id="graph_bar" style="width: 100%; height: 280px;"></div>
+										<!-- end of user-activity-graph -->
+
+										<div class="" role="tabpanel" data-example-id="togglable-tabs">
+											<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+												<li role="presentation" class="active"><a
+													href="#tab_content1" id="home-tab" role="tab"
+													data-toggle="tab" aria-expanded="true">Compte</a></li>
+												<li role="presentation" class=""><a
+													href="#tab_content2" role="tab" id="profile-tab"
+													data-toggle="tab" aria-expanded="false">Historique
+														Dépots</a></li>
+												<li role="presentation" class=""><a
+													href="#tab_content3" role="tab" id="profile-tab2"
+													data-toggle="tab" aria-expanded="false">Historique
+														Retraits</a></li>
+											</ul>
+											<div id="myTabContent" class="tab-content">
+												<div role="tabpanel" class="tab-pane fade active in"
+													id="tab_content1" aria-labelledby="home-tab">
+
+													<br />
+													<div class="row top_tiles" style="margin: 10px 0;">
+														<div class="col-md-5 col-sm-4 col-xs-6 tile">
+															<span>Solde</span>
+															<h2>
+																<span class="label label-warning" th:text="${solde}"></span>
+																CFA
+															</h2>
+															<span class="sparkline_one" style="height: 160px;">
+																<canvas width="200" height="60"
+																	style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+															</span>
+														</div>
+														<div class="col-md-5 col-sm-4 col-xs-6 tile">
+															<span>Commission</span>
+															<h2>
+																<span class="label label-info" th:text="${tcommission}"></span>
+																CFA
+															</h2>
+															<span class="sparkline_two" style="height: 160px;">
+																<canvas width="200" height="60"
+																	style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+															</span>
+														</div>
+
+													</div>
+
+												</div>
+												<div role="tabpanel" class="tab-pane fade" id="tab_content2"
+													aria-labelledby="profile-tab">
+
+													<!-- start user projects -->
+													<table class="data table table-striped no-margin">
+														<thead>
+															<tr>
+																<th style="width: 1%">#</th>
+																<th style="width: 20%">Date</th>
+																<th>Montant</th>
+																<th>Statut</th>
+																<th style="width: 30%">#Actions</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr th:each="operation : ${depots}">
+																<td><div th:text=${operation.idOperation}></div></td>
+																<td><div th:text=${operation.dateOperation}></div></td>
+																<td><div th:text=${operation.montant}></div></td>
+																<td><div th:text=${operation.status}></div></td>
+																<td><a href="#" class="btn btn-primary btn-xs"><i
+																		class="fa fa-folder"></i> Details </a> <a href="#"
+																	class="btn btn-warning btn-xs"> <i
+																		class="fa fa-close"></i> Annuler
+																</a></td>
+															</tr>
+														</tbody>
+													</table>
+													<!-- end user projects -->
+
+												</div>
+												<div role="tabpanel" class="tab-pane fade" id="tab_content3"
+													aria-labelledby="profile-tab">
+													<!-- start user projects -->
+													<table class="data table table-striped no-margin">
+														<thead>
+															<tr>
+																<th style="width: 1%">#</th>
+																<th style="width: 20%">Date</th>
+																<th>Montant</th>
+																<th>Statut</th>
+																<th style="width: 30%">#Actions</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr th:each="operation : ${retraits}">
+																<td><div th:text=${operation.idOperation}></div></td>
+																<td><div th:text=${operation.dateOperation}></div></td>
+																<td><div th:text=${operation.montant}></div></td>
+																<td><div th:text=${operation.status}></div></td>
+																<td><a href="#" class="btn btn-primary btn-xs"><i
+																		class="fa fa-folder"></i> Details </a> <a href="#"
+																	class="btn btn-warning btn-xs"> <i
+																		class="fa fa-close"></i> Annuler
+																</a></td>
+															</tr>
+														</tbody>
+													</table>
+													<!-- end user projects -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					<div th:replace="fragments/footer :: footer">&copy; 2016
+						Wallet</div>
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="../../../resources/gentellela/vendor/jquery/jquery.min.js"
+		th:src="@{/resources/gentellela/vendors/jquery/jquery.min.js}"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script
+		src="../../../resources/gentellela/vendors/bootstrap/js/bootstrap.min.js"
+		th:src="@{/resources/gentellela/vendors/bootstrap/js/bootstrap.min.js}"></script>
+
+	<!-- FastClick -->
+	<script
+		src="../../../resources/gentellela/vendors/fastclick/fastclick.js"
+		th:src="@{/resources/gentellela/vendors/fastclick/fastclick.js}"></script>
+	<!-- NProgress -->
+	<script
+		src="../../../resources/gentellela/vendors/nprogress/nprogress.js"
+		th:src="@{/resources/gentellela/vendors/nprogress/nprogress.js}"></script>
+
+	<!-- jQuery Sparklines -->
+	<script
+		src="../../../resources/gentellela/vendors/jquery-sparkline/jquery.sparkline.min.js"
+		th:src="@{/resources/gentellela/vendors/jquery-sparkline/jquery.sparkline.min.js}"></script>
+
+	<!-- morris.js -->
+	<script
+		src="../../../resources/gentellela/vendors/raphael/raphael.min.js"
+		th:src="@{/resources/gentellela/vendors/raphael/raphael.min.js}"></script>
+	<script
+		src="../../../resources/gentellela/vendors/morris/morris.min.js"
+		th:src="@{/resources/gentellela/vendors/morris/morris.min.js}"></script>
+
+
+	<!-- bootstrap-daterangepicker -->
+	<script src="../../../resources/gentellela/js/moment/moment.min.js"
+		th:src="@{/resources/gentellela/js/moment/moment.min.js}"></script>
+	<script
+		src="../../../resources/gentellela/js/datepicker/daterangepicker.js"
+		th:src="@{/resources/gentellela/js/datepicker/daterangepicker.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script src="../../../resources/gentellela/js/custom.min.js"
+		th:src="@{/resources/gentellela/js/custom.min.js}"></script>
+
+	<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
+		$(function() {
+			Morris.Bar({
+				element : 'graph_bar',
+				data : [ {
+					"period" : "Jan",
+					"Hours worked" : /*[[${data1 == null} ? 0 : ${data1}]]*/
+				}, {
+					"period" : "Feb",
+					"Hours worked" : /*[[${data2 == null} ? 0 : ${data2}]]*/
+				}, {
+					"period" : "Mar",
+					"Hours worked" : /*[[${data3 == null} ? 0 : ${data3}]]*/
+				}, {
+					"period" : "Apr",
+					"Hours worked" : /*[[${data4 == null} ? 0 : ${data4}]]*/
+				}, {
+					"period" : "May",
+					"Hours worked" : /*[[${data5 == null} ? 0 : ${data5}]]*/
+				}, {
+					"period" : "Jun",
+					"Hours worked" : /*[[${data6 == null} ? 0 : ${data6}]]*/
+				}, {
+					"period" : "Jul",
+					"Hours worked" : /*[[${data7 == null} ? 0 : ${data7}]]*/
+				}, {
+					"period" : "Aug",
+					"Hours worked" : /*[[${data8 == null} ? 0 : ${data6}]]*/
+				}, {
+					"period" : "Sep",
+					"Hours worked" : /*[[${data9 == null} ? 0 : ${data9}]]*/
+				}, {
+					"period" : "Oct",
+					"Hours worked" : /*[[${data10 == null} ? 0 : ${data10}]]*/
+				}, {
+					"period" : "Nov",
+					"Hours worked" : /*[[${data11 == null} ? 0 : ${data11}]]*/
+				}, {
+					"period" : "Dec",
+					"Hours worked" : /*[[${data2 == null} ? 0 : ${data12}]]*/
+				} ],
+				xkey : 'period',
+				hideHover : 'auto',
+				barColors : [ '#26B99A', '#34495E', '#ACADAC', '#3498DB' ],
+				ykeys : [ 'Hours worked', 'sorned' ],
+				labels : [ 'Hours worked', 'SORN' ],
+				xLabelAngle : 60,
+				resize : true
+			});
+
+			$MENU_TOGGLE.on('click', function() {
+				$(window).resize();
+			});
+		});
+		/*]]>*/
+	</script>
+
+	<!-- datepicker -->
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+
+							var cb = function(start, end, label) {
+								console.log(start.toISOString(), end
+										.toISOString(), label);
+								$('#reportrange span').html(
+										start.format('MMMM D, YYYY') + ' - '
+												+ end.format('MMMM D, YYYY'));
+								//alert("Callback has fired: [" + start.format('MMMM D, YYYY') + " to " + end.format('MMMM D, YYYY') + ", label = " + label + "]");
+							}
+
+							var optionSet1 = {
+								startDate : moment().subtract(29, 'days'),
+								endDate : moment(),
+								minDate : '01/01/2012',
+								maxDate : '12/31/2015',
+								dateLimit : {
+									days : 60
+								},
+								showDropdowns : true,
+								showWeekNumbers : true,
+								timePicker : false,
+								timePickerIncrement : 1,
+								timePicker12Hour : true,
+								ranges : {
+									'Today' : [ moment(), moment() ],
+									'Yesterday' : [
+											moment().subtract(1, 'days'),
+											moment().subtract(1, 'days') ],
+									'Last 7 Days' : [
+											moment().subtract(6, 'days'),
+											moment() ],
+									'Last 30 Days' : [
+											moment().subtract(29, 'days'),
+											moment() ],
+									'This Month' : [ moment().startOf('month'),
+											moment().endOf('month') ],
+									'Last Month' : [
+											moment().subtract(1, 'month')
+													.startOf('month'),
+											moment().subtract(1, 'month')
+													.endOf('month') ]
+								},
+								opens : 'left',
+								buttonClasses : [ 'btn btn-default' ],
+								applyClass : 'btn-small btn-primary',
+								cancelClass : 'btn-small',
+								format : 'MM/DD/YYYY',
+								separator : ' to ',
+								locale : {
+									applyLabel : 'Submit',
+									cancelLabel : 'Clear',
+									fromLabel : 'From',
+									toLabel : 'To',
+									customRangeLabel : 'Custom',
+									daysOfWeek : [ 'Su', 'Mo', 'Tu', 'We',
+											'Th', 'Fr', 'Sa' ],
+									monthNames : [ 'January', 'February',
+											'March', 'April', 'May', 'June',
+											'July', 'August', 'September',
+											'October', 'November', 'December' ],
+									firstDay : 1
+								}
+							};
+							$('#reportrange span').html(
+									moment().subtract(29, 'days').format(
+											'MMMM D, YYYY')
+											+ ' - '
+											+ moment().format('MMMM D, YYYY'));
+							$('#reportrange').daterangepicker(optionSet1, cb);
+							$('#reportrange').on('show.daterangepicker',
+									function() {
+										console.log("show event fired");
+									});
+							$('#reportrange').on('hide.daterangepicker',
+									function() {
+										console.log("hide event fired");
+									});
+							$('#reportrange')
+									.on(
+											'apply.daterangepicker',
+											function(ev, picker) {
+												console
+														.log("apply event fired, start/end dates are "
+																+ picker.startDate
+																		.format('MMMM D, YYYY')
+																+ " to "
+																+ picker.endDate
+																		.format('MMMM D, YYYY'));
+											});
+							$('#reportrange').on('cancel.daterangepicker',
+									function(ev, picker) {
+										console.log("cancel event fired");
+									});
+							$('#options1').click(
+									function() {
+										$('#reportrange').data(
+												'daterangepicker').setOptions(
+												optionSet1, cb);
+									});
+							$('#options2').click(
+									function() {
+										$('#reportrange').data(
+												'daterangepicker').setOptions(
+												optionSet2, cb);
+									});
+							$('#destroy').click(
+									function() {
+										$('#reportrange').data(
+												'daterangepicker').remove();
+									});
+						});
+	</script>
+	<!-- /datepicker -->
+</body>
+</html>

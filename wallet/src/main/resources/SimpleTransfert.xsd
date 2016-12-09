@@ -1,0 +1,29 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.payme.ml/operation/simpleTransfert"
+           targetNamespace="http://www.payme.ml/operation/simpleTransfert" elementFormDefault="qualified">
+
+    <xs:element name="getSimpleTransfertRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="countryCode" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getSimpleTransfertRespnse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="team" type="tns:team"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="team">
+        <xs:sequence>
+            <xs:element name="countryCode" type="xs:string"/>
+            <xs:element name="country" type="xs:string"/>
+            <xs:element name="nickName" type="xs:string"/>
+            <xs:element name="coach" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

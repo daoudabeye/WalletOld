@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Login | Login</title>
+
+<!-- Bootstrap Core CSS -->
+<link
+	href="../../../resources/gentellela/vendors/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/vendors/bootstrap/css/bootstrap.min.css}" />
+<!-- Custom Fonts Awesome-->
+<link
+	href="../../../resources/vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/vendor/font-awesome/css/font-awesome.min.css}" />
+<!-- NProgress -->
+<link
+	href="../../../resources/gentellela/vendors/nprogress/nprogress.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/vendors/nprogress/nprogress.css}" />
+
+<!-- Animate.css -->
+<link href="https://colorlib.com/polygon/gentelella/css/animate.min.css"
+	rel="stylesheet">
+
+<!-- Custom Theme Style -->
+<link href="../../../resources/gentellela/css/custom.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/css/custom.min.css}" />
+
+</head>
+
+<body class="login">
+
+	<div>
+		<a class="hiddenanchor" id="signup"></a> <a class="hiddenanchor"
+			id="signin"></a>
+		
+		<div class="login_wrapper">
+			<div class="animate form login_form">
+				<th:block th:if="${param.error != null}">
+			<div class="alert alert-danger alert-dismissible fade in"
+				role="alert">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<strong>Erreur de connexion.</strong> identifiant ou mot de passe incorrect.
+				Merci de réessayer.
+			</div>
+		</th:block>
+				<section class="login_content">
+					<form method="post" th:action="@{/authenticate}">
+						<h1>CONNEXION</h1>
+						<div>
+							<input type="text" class="form-control" placeholder="Numero"
+								required="required" name="username" id="inputUsername" autofocus />
+						</div>
+						<div>
+							<input type="password" class="form-control"
+								placeholder="Mot de passe" required="required" name="password"
+								id="inputPassword" />
+						</div>
+						<div>
+							<button type="submit" class="btn btn-default submit">Connexion</button>
+							<a class="reset_pass" href="#">Mot de passe oublié?</a>
+						</div>
+
+						<div class="clearfix"></div>
+
+						<div class="separator">
+							<p class="change_link">
+								Vous n'etes pas inscris ? <a href="#signup" class="to_register">
+									Créer un compte </a>
+							</p>
+
+							<div class="clearfix"></div>
+							<br />
+
+							<div>
+								<h1>
+									<i class="fa fa-paw"></i> PAYME SYS.
+								</h1>
+								<p>©2016 Tous droits réservés. PAYME</p>
+							</div>
+						</div>
+					</form>
+				</section>
+			</div>
+
+			<div id="register" class="animate form registration_form">
+				<section class="login_content">
+					<form>
+						<h1>Pré-inscription</h1>
+						<div>
+							<input type="text" class="form-control" placeholder="Numero"
+								required="required" />
+						</div>
+						<div>
+							<input type="text" class="form-control" placeholder="Nom"
+								required="required" />
+						</div>
+						<div>
+							<input type="text" class="form-control" placeholder="Prénom"
+								required="required" />
+						</div>
+						<div>
+							<input type="text" class="form-control" placeholder="Adresse" />
+						</div>
+						<div>
+							<input type="email" class="form-control" placeholder="Email" />
+						</div>
+						<div>
+							<a class="btn btn-default submit" href="index.html">Soumettre</a>
+						</div>
+
+						<div class="clearfix"></div>
+
+						<div class="separator">
+							<p class="change_link">
+								Vous avez déja un compte ? <a href="#signin" class="to_register">
+									Connectez-vous</a>
+							</p>
+
+							<div class="clearfix"></div>
+							<br />
+
+							<div>
+								<h1>
+									<i class="fa fa-paw"></i> PAYME
+								</h1>
+								<p>©2016 Tous droits réservés. PAYME</p>
+							</div>
+						</div>
+					</form>
+				</section>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

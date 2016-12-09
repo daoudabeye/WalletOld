@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Historique | Operations</title>
+
+<!-- Bootstrap Core CSS -->
+<link
+	href="../../../resources/gentellela/vendors/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/vendors/bootstrap/css/bootstrap.min.css}" />
+<!-- Custom Fonts Awesome-->
+<link
+	href="../../../resources/vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/vendor/font-awesome/css/font-awesome.min.css}" />
+<!-- NProgress -->
+<link
+	href="../../../resources/gentellela/vendors/nprogress/nprogress.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/vendors/nprogress/nprogress.css}" />
+
+<!-- Custom Theme Style -->
+<link href="../../../resources/gentellela/css/custom.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/css/custom.min.css}" />
+</head>
+
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<div class="col-md-3 left_col">
+				<div th:replace="fragments/menu :: menu">&nbsp;</div>
+			</div>
+
+			<!-- top navigation -->
+			<div class="top_nav">
+				<div th:replace="fragments/top :: top">&nbsp;</div>
+			</div>
+			<!-- /top navigation -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="row">
+						<div class="col-md-6">
+							<!-- form date pickers -->
+							<div class="x_panel" style="">
+								<div class="x_title">
+									<h2>
+										Historique <small> operations</small>
+									</h2>
+									<ul class="nav navbar-right panel_toolbox">
+										<li><a class="collapse-link"><i
+												class="fa fa-chevron-up"></i></a></li>
+										<li class="dropdown"><a href="#" class="dropdown-toggle"
+											data-toggle="dropdown" role="button" aria-expanded="false"><i
+												class="fa fa-wrench"></i></a>
+											<ul class="dropdown-menu" role="menu">
+												<li><a href="#">Settings 1</a></li>
+												<li><a href="#">Settings 2</a></li>
+											</ul></li>
+										<li><a class="close-link"><i class="fa fa-close"></i></a>
+										</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+
+								<div class="x_content">
+									<div class="well">
+										<form role="form" th:action="@{/historique}" th:method="post"
+											id="depo-form" data-parsley-validate class="form-horizontal"
+											th:object="${historiqueForm}">
+											<fieldset>
+												<div class="control-group">
+													<div class="controls">
+														<div class="input-prepend input-group">
+															<span class="add-on input-group-addon"><i
+																class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+															<input type="text" style="width: 200px"
+																th:field="*{dateDebut}" name="reservation"
+																id="reservation" class="form-control"
+																value="18/03/2016 - 19/04/2016" />
+														</div>
+													</div>
+													<div class="controls">
+														<select class="form-control select" th:field="*{keywords}"
+															id="genre" name="genre">
+															<option value="" selected="selected">-----Selectionner-----</option>
+															<option th:each="type : ${typeOperation}"
+																th:value="${type}" th:text=${type}>Wireframe</option>
+														</select>
+													</div>
+												</div>
+											</fieldset>
+											<div class="ln_solid"></div>
+											<div class="form-group">
+												<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+													<button type="submit" class="btn btn-success">Valider</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<th:block th:if="${operations != null}">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="x_panel">
+									<div class="x_title">
+										<h2>Historique</h2>
+										<ul class="nav navbar-right panel_toolbox">
+											<li><a class="collapse-link"><i
+													class="fa fa-chevron-up"></i></a></li>
+											<li class="dropdown"><a href="#" class="dropdown-toggle"
+												data-toggle="dropdown" role="button" aria-expanded="false"><i
+													class="fa fa-wrench"></i></a>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Settings 1</a></li>
+													<li><a href="#">Settings 2</a></li>
+												</ul></li>
+											<li><a class="close-link"><i class="fa fa-close"></i></a>
+											</li>
+										</ul>
+										<div class="clearfix"></div>
+									</div>
+									<div class="x_content">
+
+										<!-- start project list -->
+										<table class="table table-striped projects">
+											<thead>
+												<tr>
+													<th style="width: 1%">#</th>
+													<th style="width: 20%">Date</th>
+													<th>Montant</th>
+													<th>Statut</th>
+													<th style="width: 30%">#Actions</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="operation : ${operations}">
+													<td><div th:text=${operation.idOperation}></div></td>
+													<td><div th:text=${operation.dateOperation}></div></td>
+													<td><div th:text=${operation.montant}></div></td>
+													<td><div th:text=${operation.status}></div></td>
+													<td><a
+														href="#"
+														class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>
+															Details </a> <a href="#" class="btn btn-warning btn-xs">
+															<i class="fa fa-close"></i> Annuler
+													</a> <a href="#" class="btn btn-danger btn-xs"><i
+															class="fa fa-trash-o"></i> Supprimer </a></td>
+												</tr>
+											</tbody>
+										</table>
+										<!-- end project list -->
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</th:block>
+				</div>
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					<div th:replace="fragments/footer :: footer">&copy; 2016 Wallet</div>
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="../../../resources/gentellela/vendor/jquery/jquery.min.js"
+		th:src="@{/resources/gentellela/vendors/jquery/jquery.min.js}"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script
+		src="../../../resources/gentellela/vendors/bootstrap/js/bootstrap.min.js"
+		th:src="@{/resources/gentellela/vendors/bootstrap/js/bootstrap.min.js}"></script>
+
+	<!-- FastClick -->
+	<script
+		src="../../../resources/gentellela/vendors/fastclick/fastclick.js"
+		th:src="@{/resources/gentellela/vendors/fastclick/fastclick.js}"></script>
+
+	<!-- NProgress -->
+	<script
+		src="../../../resources/gentellela/vendors/nprogress/nprogress.js"
+		th:src="@{/resources/gentellela/vendors/nprogress/nprogress.js}"></script>
+
+
+	<!-- bootstrap-daterangepicker -->
+	<script src="../../../resources/gentellela/js/moment/moment.min.js"
+		th:src="@{/resources/gentellela/js/moment/moment.min.js}"></script>
+	<script
+		src="../../../resources/gentellela/js/datepicker/daterangepicker.js"
+		th:src="@{/resources/gentellela/js/datepicker/daterangepicker.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script src="../../../resources/gentellela/js/custom.min.js"
+		th:src="@{/resources/gentellela/js/custom.min.js}"></script>
+
+
+	<!-- bootstrap-daterangepicker -->
+	<script>
+		$(document).ready(
+				function() {
+					$('#reservation').daterangepicker(
+							null,
+							function(start, end, label) {
+								console.log(start.toISOString(), end
+										.toISOString(), label);
+							});
+				});
+	</script>
+	<!-- /bootstrap-daterangepicker -->
+
+</body>
+</html>

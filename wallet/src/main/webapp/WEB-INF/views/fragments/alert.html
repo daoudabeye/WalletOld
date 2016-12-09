@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+</head>
+<body>
+    <div th:fragment="alert (type, message)" class="alert alert-success alert-dismissible fade in" role="alert" th:classappend="'alert-' + ${type}">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">×</span>
+		</button>
+		<span th:text="${message}">message</span>
+	</div>
+</body>
+</html>

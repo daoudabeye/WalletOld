@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="left_col scroll-view" th:fragment="menu">
+		<div class="navbar nav_title" style="border: 0;">
+			<a th:href="@{/home}" class="site_title">
+				<span>PAYME SYS</span></a>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<br />
+
+		<!-- sidebar menu -->
+		<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+			<div class="menu_section">
+				<h3>General</h3>
+				<ul class="nav side-menu">
+					<li><a th:href="@{/home}"><i class="fa fa-home"></i>
+							Tableau de board </a></li>
+					<li><a><i class="fa fa-bank"></i> SEQUESTRE <span
+							class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a th:href="@{/debiter}"> Débité </a></li>
+							<li><a th:href="@{/crediter}"> Crédité</a></li>
+							<li><a th:href="@{/injecter}"> Transfert</a></li>
+							<li><a th:href="@{/statut}"> Statut</a></li>
+						</ul></li>
+					<li><a><i class="fa fa-credit-card"></i> Operations <span
+							class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a th:href="@{/operation}"> Opération </a></li>
+							<li><a th:href="@{/retrait}">Retrait</a></li>
+							<li><a th:href="@{/confirmation}">Confirmer</a></li>
+							<li><a th:href="@{/transfert}">Transfert</a></li>
+							<li><a th:href="@{/paiement}">Paiement</a></li>
+						</ul></li>
+					<li><a><i class="fa fa-money"></i> Cash to Cash <span
+							class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a th:href="@{/envoidargent}"> Envoi d'argent <span
+									class="label label-success pull-right">New</span></a></li>
+							<li><a th:href="@{/receptiondargent}">Reception d'argent
+									<span class="label label-success pull-right">New</span>
+							</a></li>
+							<li><a href="#">Small World <span
+									class="label label-success pull-right">New</span></a></li>
+							<li><a href="#">Vérifier un transfert</a></li>
+							<li><a href="#">Dévis / Pays</a></li>
+						</ul></li>
+				</ul>
+			</div>
+			<div class="menu_section">
+				<h3>ADMINISTRATION</h3>
+				<ul class="nav side-menu">
+					<li><a><i class="fa fa-user"></i> Utilisateur <span
+							class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a th:href="@{/search}">Recherche</a></li>
+							<li><a th:href="@{/creer}">Créer un compte</a></li>
+							<li><a th:href="@{/phone/liste}">Mes Numéros</a></li>
+							<li><a th:href="@{/roles}">Profiles</a></li>
+							<li><a th:href="@{/historique}">Historique</a></li>
+						</ul></li>
+
+					<li><a th:href="@{/grille}"><i class="fa fa-list-alt"></i>
+							Grille tarifaire </a></li>
+				</ul>
+			</div>
+
+		</div>
+		<!-- /sidebar menu -->
+
+		<!-- /menu footer buttons -->
+		<div class="sidebar-footer hidden-small">
+			<a data-toggle="tooltip" data-placement="top" title="Settings"> <span
+				class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+			</a> <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+				<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+			</a> <a data-toggle="tooltip" data-placement="top" title="Lock"> <span
+				class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+			</a> <a data-toggle="tooltip" data-placement="top" title="Logout"
+				href="/logout"> <span class="glyphicon glyphicon-off"
+				aria-hidden="true"></span>
+			</a>
+		</div>
+		<!-- /menu footer buttons -->
+	</div>
+</body>
+</html>

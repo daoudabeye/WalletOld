@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2016-08-18T04:01:31 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="recu" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="wallet2.0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#EEEFF0"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#CACED0">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#D8D8D8"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="tableDataset" uuid="f13e6d36-5148-4ecc-bbe3-3035def80980">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="idoperation" class="java.lang.String">
+		<parameterDescription><![CDATA[id de l'operation]]></parameterDescription>
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT id,
+	type,
+	montant,
+	frais,
+	date,
+	client_nom AS nomclient,
+	client_prenom AS prenomclient,
+	numero_client AS clientnumero,
+	agent_nom AS nomagent,
+	agent_prenom AS prenomagent,
+	numero_agent AS agentnumero
+FROM v_recu_op
+WHERE 
+	 v_recu_op.id = $P{idoperation}]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="type" class="java.lang.String"/>
+	<field name="montant" class="java.lang.Double"/>
+	<field name="frais" class="java.lang.Double"/>
+	<field name="date" class="java.sql.Timestamp"/>
+	<field name="nomclient" class="java.lang.String"/>
+	<field name="prenomclient" class="java.lang.String"/>
+	<field name="clientnumero" class="java.lang.String"/>
+	<field name="nomagent" class="java.lang.String"/>
+	<field name="prenomagent" class="java.lang.String"/>
+	<field name="agentnumero" class="java.lang.String"/>
+	<group name="Gruppo1">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="0" width="556" height="20" forecolor="#000000" uuid="7704da8a-15f5-49a1-9c4c-5fa682bd4652"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{type}.toString()]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band>
+				<property name="local_mesure_unitheight" value="pixel"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="197" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="108" width="84" height="25" uuid="57aed2b1-4f4e-40a3-a6ad-54dae8dd4c5a">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AGENT :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="95" width="556" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="410" y="108" width="84" height="25" uuid="139ebe8d-25b0-411e-986c-270015400874">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLIENT :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="10" width="50" height="20" uuid="0f86baff-6386-4f3f-b3fe-2388707babe8"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Date:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="465" y="10" width="84" height="20" uuid="bb10dbe1-0a4f-4722-9953-c163b63cf979"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="415" y="30" width="50" height="20" uuid="0b3f9342-da78-4cfa-9fc5-2301c4749678"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Id #]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="25" width="205" height="15" uuid="b8cc42fd-b569-497d-834d-7e854040ad18"/>
+				<text><![CDATA[tel : 20 22 20 71]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="8" width="205" height="15" uuid="c226e44d-3bb5-4145-b0b3-903bf1d79fde"/>
+				<text><![CDATA[Hamdalley aci 2000]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="465" y="30" width="84" height="20" uuid="dcec1857-cc89-4031-896b-e2fccdad5fa0"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="133" width="100" height="15" uuid="21fbdb9a-c4b8-46c9-b698-28452b7047a7"/>
+				<textFieldExpression><![CDATA[$F{agentnumero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="148" width="100" height="15" uuid="5c2fccc0-5237-4287-a167-9851276724ea"/>
+				<textFieldExpression><![CDATA[$F{nomagent}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="163" width="100" height="15" uuid="32f4fc1d-105a-450c-9e59-9cbdc966be72"/>
+				<textFieldExpression><![CDATA[$F{prenomagent}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="133" width="100" height="15" uuid="eee1bd56-f319-4e04-b970-aa38bd9c9fbf"/>
+				<textFieldExpression><![CDATA[$F{clientnumero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="148" width="100" height="15" uuid="10d24934-bf93-4c82-9ba1-390f021daea7"/>
+				<textFieldExpression><![CDATA[$F{nomclient}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="163" width="100" height="15" uuid="bdb5116c-dbec-423a-9e7b-5b62274a195d"/>
+				<textFieldExpression><![CDATA[$F{prenomclient}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="184" y="40" width="205" height="15" uuid="310109b6-fd4d-4367-909d-7dd09f93957c"/>
+				<text><![CDATA[E-mail : info@wonderbankmali.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="55" width="205" height="15" uuid="8ee58c61-8325-4f60-bffd-d81aa530a333"/>
+				<text><![CDATA[web : www.lemonway.ml]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="25" width="130" height="25" uuid="79ca006a-665c-4f93-9afa-935c67967596">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LEMONWAY]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="55">
+			<staticText>
+				<reportElement x="0" y="10" width="556" height="30" uuid="5aa6aba7-8c17-469e-9b7b-030e5a46d504"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[L'operation à été effectuée avec succès. ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="111">
+			<textField>
+				<reportElement x="281" y="2" width="100" height="30" uuid="c099f92b-36d7-4cfc-b71d-9c17a3fd35f3"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{montant}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="181" y="2" width="100" height="30" uuid="0aa2f499-3083-487d-bb14-42bf0d237b98"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Montant]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="281" y="32" width="100" height="30" uuid="4eee4f20-70a5-4697-9bb9-705add1adcd9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{frais}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="181" y="32" width="100" height="30" uuid="95270dc9-ec09-43c4-98c3-b72905fe4ef3"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Frais]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="282" y="62" width="100" height="30" uuid="c4e1079e-2617-44f5-9ade-d91f03622fcf"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="182" y="62" width="100" height="30" uuid="824480a9-4e99-471a-9bc6-25d3eae3fead"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="177">
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="147" width="556" height="30" backcolor="#E6E8E9" uuid="36aa233d-4305-48e6-974a-1bbf89bb3c8f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[MERCI POUR VOTRE FIDELITE]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Operation | Crediter</title>
+
+<!-- Bootstrap Core CSS -->
+<link
+	href="../../../resources/gentellela/vendors/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/vendors/bootstrap/css/bootstrap.min.css}" />
+<!-- Custom Fonts Awesome-->
+<link
+	href="../../../resources/vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/vendor/font-awesome/css/font-awesome.min.css}" />
+<!-- NProgress -->
+<link
+	href="../../../resources/gentellela/vendors/nprogress/nprogress.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/vendors/nprogress/nprogress.css}" />
+
+<!-- Custom Theme Style -->
+<link href="../../../resources/gentellela/css/custom.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/css/custom.min.css}" />
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+</head>
+
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<div class="col-md-3 left_col">
+				<div th:replace="fragments/menu :: menu">&nbsp;</div>
+			</div>
+
+			<!-- top navigation -->
+			<div class="top_nav">
+				<div th:replace="fragments/top :: top">&nbsp;</div>
+			</div>
+			<!-- /top navigation -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>Operation</h3>
+						</div>
+
+						<div class="title_right">
+							<div
+								class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+								<div class="input-group">
+									<input type="text" class="form-control"
+										placeholder="recherche de..."> <span
+										class="input-group-btn">
+										<button class="btn btn-default" type="button">trouver</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<div class="row">
+						<div class="col-md-8 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>TRANSFERT SQ - AG</h2>
+									<ul class="nav navbar-right panel_toolbox">
+										<li><a class="collapse-link"><i
+												class="fa fa-chevron-up"></i></a></li>
+										<li class="dropdown"><a href="#" class="dropdown-toggle"
+											data-toggle="dropdown" role="button" aria-expanded="false"><i
+												class="fa fa-wrench"></i></a>
+											<ul class="dropdown-menu" role="menu">
+												<li><a href="#">Settings 1</a></li>
+											</ul></li>
+										<li><a class="close-link"><i class="fa fa-close"></i></a>
+										</li>
+									</ul>
+
+									<div class="clearfix"></div>
+								</div>
+								<th:block th:if="${success == null}">
+									<div class="x_content">
+										<th:block th:if="${#fields.hasErrors('${operationForm.*}')}">
+											<div
+												th:replace="fragments/alert :: alert (type='danger', message=${errorMessage})">Alert</div>
+										</th:block>
+										<th:block th:if="${notFoundMessage != null}">
+											<div
+												th:replace="fragments/alert :: alert (type='danger', message=${notFoundMessage})">Alert</div>
+										</th:block>
+										<form role="form" th:action="@{/injecter}" th:method="post"
+											id="depo-form" data-parsley-validate
+											class="form-horizontal form-label-left"
+											th:object="${operationForm}">
+
+											<div class="item  form-group"
+												th:classappend="${#fields.hasErrors('numero')}? 'bad'">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12"
+													for="first-name">Numéro Dst <span class="required">*</span>
+												</label>
+												<div class="col-md-4 col-sm-6 col-xs-12">
+													<input type="number" id="numero" required="required"
+														th:field="*{numero}" class="form-control"
+														onblur="retrieveUser()" data-validate-minmax="1,99999999" />
+												</div>
+											</div>
+
+											<div class="item form-group"
+												th:classappend="${#fields.hasErrors('montant')}? 'bad'">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12"
+													for="first-name">Montant <span class="required">*</span>
+												</label>
+												<div class="col-md-4 col-sm-6 col-xs-12">
+													<input type="text" id="first-name" required="required"
+														th:field="*{montant}" pattern="^[0-9]([0-9]*)$"
+														class="form-control col-md-7 col-xs-12">
+												</div>
+											</div>
+
+											<div class="ln_solid"></div>
+											<div class="form-group">
+												<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+													<button type="submit" class="btn btn-success"
+														onclick="$.blockUI();" id="depotBoutton">Transfert</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</th:block>
+
+								<th:block th:if="${success != null}">
+									<div class="x_content">
+										<div class="bs-example" data-example-id="simple-jumbotron">
+											<div class="jumbotron">
+												<h5>Opération effectuée</h5>
+												<p>
+													<span class="label label-warning" th:text="${success}"></span>
+												</p>
+											</div>
+										</div>
+										<div class="ln_solid"></div>
+									</div>
+								</th:block>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					<div th:replace="fragments/footer :: footer">&copy; 2016 Wallet</div>
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function retrieveUser() {
+			var url = '/wallet/user/depot';
+
+			if ($('#numero').val() != '') {
+				url = url + '/' + $('#numero').val();
+			}
+
+			$("#profile").load(url);
+		}
+
+		// unblock when ajax activity stops 
+		$(document).ajaxStop($.unblockUI);
+
+		function test() {
+			$.ajax({
+				url : '/depot',
+				cache : false
+			});
+		}
+	</script>
+
+	<!-- jQuery -->
+	<script
+		src="../../../resources/gentellela/vendors/jquery/jquery.min.js"
+		th:src="@{/resources/gentellela/vendors/jquery/jquery.min.js}"></script>
+
+	<!-- Bock ui-->
+	<script
+		src="../../../resources/gentellela/vendors/uiblock/jquery.blockUI.min.js"
+		th:src="@{/resources/gentellela/vendors/uiblock/jquery.blockUI.min.js}"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script
+		src="../../../resources/gentellela/vendors/bootstrap/js/bootstrap.min.js"
+		th:src="@{/resources/gentellela/vendors/bootstrap/js/bootstrap.min.js}"></script>
+
+	<!-- FastClick -->
+	<script
+		src="../../../resources/gentellela/vendors/fastclick/fastclick.js"
+		th:src="@{/resources/gentellela/vendors/fastclick/fastclick.js}"></script>
+	<!-- NProgress -->
+	<script
+		src="../../../resources/gentellela/vendors/nprogress/nprogress.js"
+		th:src="@{/resources/gentellela/vendors/nprogress/nprogress.js}"></script>
+
+	<!-- validator -->
+	<script
+		src="../../../resources/gentellela/vendors/validator/validator.js"
+		th:src="@{/resources/gentellela/vendors/validator/validator.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script src="../../../resources/gentellela/js/custom.min.js"
+		th:src="@{/resources/gentellela/js/custom.min.js}"></script>
+
+	<!-- validator -->
+	<script>
+		// initialize the validator function
+		validator.message.date = 'not a real date';
+
+		// validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
+		$('form').on('blur',
+				'input[required], input.optional, select.required',
+				validator.checkField).on('change', 'select.required',
+				validator.checkField).on('keypress',
+				'input[required][pattern]', validator.keypress);
+
+		$('.multi.required').on('keyup blur', 'input', function() {
+			validator.checkField.apply($(this).siblings().last()[0]);
+		});
+
+		$('form').submit(function(e) {
+			e.preventDefault();
+			var submit = true;
+
+			// evaluate the form using generic validaing
+			if (!validator.checkAll($(this))) {
+				submit = false;
+			}
+
+			if (submit)
+				this.submit();
+
+			return false;
+		});
+	</script>
+	<!-- /validator -->
+</body>
+</html>

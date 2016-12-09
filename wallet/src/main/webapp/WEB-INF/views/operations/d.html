@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Depot</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="../../../resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/vendor/bootstrap/css/bootstrap.min.css}" />
+
+<!-- MetisMenu CSS -->
+<link href="../../../resources/vendor/metisMenu/metisMenu.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/vendor/metisMenu/metisMenu.min.css}" />
+
+<!-- Custom CSS -->
+<link href="../../../resources/dist/css/sb-admin-2.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/dist/css/sb-admin-2.css}" />
+
+
+<!-- Custom Fonts -->
+<link
+	href="../../../resources/vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/vendor/font-awesome/css/font-awesome.min.css}" />
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+	<div id="wrapper">
+
+		<!-- START PAGE SIDEBAR -->
+		<div th:replace="fragments/nav :: nav">&nbsp;</div>
+		<!-- END PAGE SIDEBAR -->
+
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">OPERATION DE DEPOT</h1>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+			<!--/* Show general error message when form contains errors */-->
+			<th:block th:if="${#fields.hasErrors('${operationForm.*}')}">
+				<div
+					th:replace="fragments/alert :: alert (type='danger', message=${errorMessage})">Alert</div>
+			</th:block>
+			<th:block th:if="${notFoundMessage != null}">
+				<div
+					th:replace="fragments/alert :: alert (type='danger', message=${notFoundMessage})">Alert</div>
+			</th:block>
+			<th:block th:if="${success == null}">
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="panel panel-default">
+							<div class="panel-heading">Faire un dépot d'argent sur un
+								compte client.</div>
+							<div class="panel-body">
+								<form role="form" th:action="@{/depot}"
+									th:object="${operationForm}" id="depotForm">
+									<div class="form-group input-group">
+										<input type="text" class="form-control" placeholder="Numéro" onblur="retrieveUser()"/>
+										<span class="input-group-btn">
+											<button class="btn btn-default" type="button" onclick="retrieveUser()">
+												<i class="fa fa-search"></i>
+											</button>
+										</span>
+									</div>
+									<div class="form-group">
+										<input class="form-control" placeholder="Nom"
+											required="required" />
+									</div>
+									<div class="form-group">
+										<input class="form-control" placeholder="Prénom"
+											required="required" />
+									</div>
+									<div class="form-group">
+										<input class="form-control" placeholder="Enter text"
+											required="required" />
+									</div>
+								</form>
+							</div>
+							<div class="panel-footer">
+								<button type="button" class="btn btn-primary btn-lg btn-block">Faire
+									le dépot</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-4">
+						<div class="panel panel-default">
+							<div class="panel-body" th:fragment="profile" id="profile">
+								<h3>Details Bénéficiaire</h3>
+								<th:block th:if="${user.nom != null}">
+									<div class="table-responsive">
+										<table class="table table-bordered table-striped">
+											<tbody>
+												<tr>
+													<th>Nom</th>
+													<td colspan="4"><span class="label label-warning"
+														th:text="${user.nom}"></span></td>
+												</tr>
+												<tr>
+													<th>Prénom</th>
+													<td colspan="4"><span class="label label-warning"
+														th:text="${user.prenom}"></span></td>
+												</tr>
+												<tr>
+													<th>Pièce d'identité</th>
+													<td colspan="4"><span class="label label-warning"
+														th:text="${user.numeroPiece}"></span></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</th:block>
+
+							</div>
+						</div>
+					</div>
+					<!-- /.col-lg-12 -->
+				</div>
+			</th:block>
+
+			<th:block th:if="${success != null}">
+				<div class="row">
+					<div class="col-lg-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            Opération effectuée
+                        </div>
+                        <div class="panel-body">
+                        	<p><span class="label label-warning"
+									th:text="${success}"></span>
+                            </p>
+                            <a href="#"  class="btn btn-info btn-block" target="_blank"
+								th:href="@{'/generateOpRecu/' + ${operation.idOperation} +'/pdf'}">
+								<span class="fa fa-arrow-circle-right"></span> Recu (pdf)</a>
+                        </div>
+                        <div class="panel-footer">
+                            Le recu est au format PDF.
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+				</div>
+				
+			</th:block>
+		</div>
+		<!-- /#page-wrapper -->
+
+	</div>
+	<!-- /#wrapper -->
+
+	<script type="text/javascript">
+		function retrieveUser() {
+			var url = '/wallet/user/depot';
+
+			if ($('#numero').val() != '') {
+				url = url + '/' + $('#numero').val();
+			}
+
+			$("#profile").load(url);
+		}
+	</script>
+
+	<!-- jQuery -->
+	<script src="../../../resources/vendor/jquery/jquery.min.js"
+		th:src="@{/resources/vendor/jquery/jquery.min.js}"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="../../../resources/vendor/bootstrap/js/bootstrap.min.js"
+		th:src="@{/resources/vendor/bootstrap/js/bootstrap.min.js}"></script>
+
+	<!-- Metis Menu Plugin JavaScript -->
+	<script src="../../../resources/vendor/metisMenu/metisMenu.min.js"
+		th:src="@{/resources/vendor/metisMenu/metisMenu.min.js}"></script>
+
+	<!-- Custom Theme JavaScript -->
+	<script src="../../../resources/dist/js/sb-admin-2.js"
+		th:src="@{/resources/dist/js/sb-admin-2.js}"></script>
+</body>
+
+</html>

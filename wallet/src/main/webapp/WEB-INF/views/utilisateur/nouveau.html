@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Nouveau compte |</title>
+
+<!-- Bootstrap Core CSS -->
+<link
+	href="../../../resources/gentellela/vendors/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/vendors/bootstrap/css/bootstrap.min.css}" />
+<!-- Custom Fonts Awesome-->
+<link
+	href="../../../resources/vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/vendor/font-awesome/css/font-awesome.min.css}" />
+<!-- NProgress -->
+<link
+	href="../../../resources/gentellela/vendors/nprogress/nprogress.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/vendors/nprogress/nprogress.css}" />
+
+<!-- Custom Theme Style -->
+<link href="../../../resources/gentellela/css/custom.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/resources/gentellela/css/custom.min.css}" />
+</head>
+
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<div class="col-md-3 left_col">
+				<div th:replace="fragments/menu :: menu">&nbsp;</div>
+			</div>
+
+			<!-- top navigation -->
+			<div class="top_nav">
+				<div th:replace="fragments/top :: top">&nbsp;</div>
+			</div>
+			<!-- /top navigation -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>NOUVEAU COMPTE</h3>
+						</div>
+
+						<div class="title_right">
+							<div
+								class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+								<div class="input-group">
+									<input type="text" class="form-control"
+										placeholder="Search for..."> <span
+										class="input-group-btn">
+										<button class="btn btn-default" type="button">Go!</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>
+										FORMULAIRE <small>inscription d'un nouveau utilisateur</small>
+									</h2>
+									<ul class="nav navbar-right panel_toolbox">
+										<li><a class="collapse-link"><i
+												class="fa fa-chevron-up"></i></a></li>
+										<li class="dropdown"><a href="#" class="dropdown-toggle"
+											data-toggle="dropdown" role="button" aria-expanded="false"><i
+												class="fa fa-wrench"></i></a>
+											<ul class="dropdown-menu" role="menu">
+												<li><a href="#">Settings 1</a></li>
+												<li><a href="#">Settings 2</a></li>
+											</ul></li>
+										<li><a class="close-link"><i class="fa fa-close"></i></a>
+										</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<br />
+									<form class="form-horizontal form-label-left input_mask"
+										id="creerForm" method="post" th:action="@{/creer}"
+										th:object="${utilisateurForm}">
+
+										<div class="col-md-6">
+
+											<div class="form-group" th:if="${update == false}"
+												th:classappend="${#fields.hasErrors('profile')}? 'has-error'">
+												<label class="col-md-3 control-label">Profile</label>
+												<div class="col-md-9">
+													<select class="form-control select" th:field="*{profile}"
+														id="profile" name="profile">
+														<option value="" selected="selected">-----Selectionner-----</option>
+														<option th:each="type : ${allProfile}" th:value="${type}"
+															th:text=${type}>Wireframe</option>
+													</select> <span class="help-block"
+														th:if="${#fields.hasErrors('profile')}"
+														th:errors="*{profile}">Selectionner le profile</span>
+												</div>
+											</div>
+
+											<div class="form-group"
+												th:classappend="${#fields.hasErrors('genre')}? 'has-error'">
+												<label class="col-md-3 control-label">Genre</label>
+												<div class="col-md-9">
+													<select class="form-control select" th:field="*{genre}"
+														id="genre" name="genre">
+														<option value="" selected="selected">-----Selectionner-----</option>
+														<option th:each="type : ${allGenre}" th:value="${type}"
+															th:text=${type}>Wireframe</option>
+													</select> <span class="help-block"
+														th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">Selectionner
+														le Genre</span>
+												</div>
+											</div>
+
+											<div class="form-group"
+												th:classappend="${#fields.hasErrors('numero')}? 'has-error'">
+												<label class="col-md-3 control-label">Numero</label>
+												<div class="col-md-9">
+													<div class="input-group">
+														<span class="input-group-addon">MALI (+223)</span> <input
+															id=numero name=numero type="text" class="form-control"
+															placeholder="Numero" th:field="*{numero}" />
+													</div>
+													<span class="help-block"
+														th:if="${#fields.hasErrors('numero')}"
+														th:errors="*{numero}">Saisissez le numero sans
+														l'indicatif</span>
+												</div>
+											</div>
+
+											<div class="form-group"
+												th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+												<label class="col-md-3 control-label">E-mail</label>
+												<div class="col-md-9">
+													<div class="input-group">
+														<span class="input-group-addon">@</span> <input
+															type="text" class="form-control" placeholder="E-mail"
+															th:field="*{email}" id="email" name="email" />
+													</div>
+													<span class="help-block"
+														th:if="${#fields.hasErrors('numero')}"
+														th:errors="*{numero}">Email incorrect</span>
+												</div>
+											</div>
+
+											<div class="form-group"
+												th:classappend="${#fields.hasErrors('nom')}? 'has-error'">
+												<label class="col-md-3 control-label">Nom</label>
+												<div class="col-md-9">
+													<div class="input-group">
+														<span class="input-group-addon"><span
+															class="fa fa-pencil"></span></span> <input type="text"
+															class="form-control" placeholder="Nom" th:field="*{nom}"
+															id="nom" name="nom" />
+													</div>
+													<span class="help-block"
+														th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Valeur
+														incorrect</span>
+												</div>
+											</div>
+
+											<div class="form-group"
+												th:classappend="${#fields.hasErrors('prenom')}? 'has-error'">
+												<label class="col-md-3 control-label">Prenom</label>
+												<div class="col-md-9">
+													<div class="input-group">
+														<span class="input-group-addon"><span
+															class="fa fa-pencil"></span></span> <input type="text"
+															class="form-control" placeholder="prenom"
+															th:field="*{prenom}" id="prenom" name="prenom" />
+													</div>
+													<span class="help-block"
+														th:if="${#fields.hasErrors('prenom')}"
+														th:errors="*{prenom}">Prenom incorrect</span>
+												</div>
+											</div>
+
+											<div class="form-group"
+												th:classappend="${#fields.hasErrors('adresse')}? 'has-error'">
+												<label class="col-md-3 control-label">Adresse</label>
+												<div class="col-md-9">
+													<div class="input-group">
+														<span class="input-group-addon"><span
+															class="fa fa-pencil"></span></span> <input type="text"
+															class="form-control" placeholder="Adresse de residence"
+															th:field="*{adresse}" id="adresse" name="adresse" />
+													</div>
+													<span class="help-block"
+														th:if="${#fields.hasErrors('adresse')}"
+														th:errors="*{adresse}">Adresse incorrect</span>
+												</div>
+											</div>
+
+											<div class="form-group"
+												th:classappend="${#fields.hasErrors('ville')}? 'has-error'">
+												<label class="col-md-3 control-label">Region</label>
+												<div class="col-md-9">
+													<select class="form-control select" th:field="*{ville}"
+														id="ville" name="ville" data-live-search="true">
+														<option value="" selected="selected">-----Selectionner-----</option>
+														<option th:each="type : ${allRegion}" th:value="${type}"
+															th:text=${type}>Wireframe</option>
+													</select> <span class="help-block"
+														th:if="${#fields.hasErrors('ville')}" th:errors="*{ville}">Ville
+														incorrect</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+
+											<div class="form-group"
+												th:classappend="${#fields.hasErrors('operateur')}? 'has-error'">
+												<label class="col-md-3 control-label">Opérateur</label>
+												<div class="col-md-9">
+													<label class="check" th:each="op : ${operateur}"> <input
+														type="radio" class="iradio" name="operateur"
+														th:field="*{operateur}" th:value="${op}" th:text="${op} " />
+													</label> <span class="help-block">Opérateur téléphonique</span>
+												</div>
+											</div>
+											<div class="form-group"
+												th:classappend="${#fields.hasErrors('mobile')}? 'has-error'">
+												<label class="col-md-3 control-label">Mobile</label>
+												<div class="col-md-9">
+													<label class="check" th:each="mob : ${mobile}"> <input
+														type="radio" class="iradio" name="mobile"
+														checked="checked" th:field="*{mobile}" th:value="${mob}"
+														th:text="${mob} " />
+													</label> <span class="help-block">Status du téléphone mobile</span>
+												</div>
+											</div>
+
+											<div class="form-group"
+												th:classappend="${#fields.hasErrors('depot')}? 'has-error'">
+												<label class="col-md-3 control-label">Dépot</label>
+												<div class="col-md-9">
+													<div class="input-group">
+														<input type="text" class="form-control"
+															th:disabled="${update}" placeholder="Depot initial"
+															th:field="*{depot}" id="depot" name="depot" /> <span
+															class="input-group-addon">.00 FCFA</span>
+													</div>
+													<span class="help-block"
+														th:if="${#fields.hasErrors('depot')}" th:errors="*{depot}">Depot
+														incorrect</span>
+												</div>
+											</div>
+
+											<div class="form-group"
+												th:classappend="${#fields.hasErrors('dateNaissance')}? 'has-error'">
+												<label class="col-md-3 control-label">Date de
+													Naissance</label>
+												<div class="col-md-9">
+													<div class="input-group">
+														<span class="input-group-addon"><span
+															class="fa fa-calendar"></span></span> <input type="text"
+															th:disabled="${update}" class="form-control datepicker"
+															value="2014-11-01" th:field="*{dateNaissance}"
+															id="dateNaissance" name="dateNaissance">
+													</div>
+													<span class="help-block"
+														th:if="${#fields.hasErrors('dateNaissance')}"
+														th:errors="*{dateNaissance}">Date incorrect</span>
+												</div>
+											</div>
+
+											<div class="form-group"
+												th:classappend="${#fields.hasErrors('typePiece')}? 'has-error'">
+												<label class="col-md-3 control-label">Type de carte</label>
+												<div class="col-md-9">
+													<select class="form-control select" data-live-search="true"
+														th:field="*{typePiece}" id="typePiece" name="typePiece">
+														<option value="" selected="selected">-----Selectionner-----</option>
+														<option th:each="type : ${allPiece}" th:value="${type}"
+															th:text=${type}>Wireframe</option>
+													</select> <span class="help-block"
+														th:if="${#fields.hasErrors('typePiece')}"
+														th:errors="*{typePiece}">Selectionner la piece</span>
+												</div>
+											</div>
+
+											<div class="form-group"
+												th:classappend="${#fields.hasErrors('numeroPiece')}? 'has-error'">
+												<label class="col-md-3 control-label">Numéro carte
+													d'identité</label>
+												<div class="col-md-9">
+													<div class="input-group">
+														<span class="input-group-addon"><span
+															class="fa fa-pencil"></span></span> <input type="text"
+															class="form-control" placeholder="Numero de la carte"
+															th:field="*{numeroPiece}" id="numeroPiece"
+															name="numeroPiece" />
+													</div>
+													<span class="help-block"
+														th:if="${#fields.hasErrors('numeroPiece')}"
+														th:errors="*{numeroPiece}">Numero de la piece</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-md-3 control-label">Pièce jointe</label>
+												<div class="col-md-9">
+													<input type="file" class="fileinput btn-primary"
+														name="jointe" id="jointe" title="Parcourir un fichier" />
+													<span class="help-block">Photo</span>
+												</div>
+											</div>
+											<div class="ln_solid"></div>
+											<div class="form-group">
+												<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+													<button type="submit" class="btn btn-primary">Enregistrer</button>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					<div th:replace="fragments/footer :: footer">&copy; 2016 Wallet</div>
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="../../../resources/gentellela/vendor/jquery/jquery.min.js"
+		th:src="@{/resources/gentellela/vendors/jquery/jquery.min.js}"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script
+		src="../../../resources/gentellela/vendors/bootstrap/js/bootstrap.min.js"
+		th:src="@{/resources/gentellela/vendors/bootstrap/js/bootstrap.min.js}"></script>
+
+	<!-- FastClick -->
+	<script
+		src="../../../resources/gentellela/vendors/fastclick/fastclick.js"
+		th:src="@{/resources/gentellela/vendors/fastclick/fastclick.js}"></script>
+	<!-- NProgress -->
+	<script
+		src="../../../resources/gentellela/vendors/nprogress/nprogress.js"
+		th:src="@{/resources/gentellela/vendors/nprogress/nprogress.js}"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script src="../../../resources/gentellela/js/custom.min.js"
+		th:src="@{/resources/gentellela/js/custom.min.js}"></script>
+
+</body>
+</html>
